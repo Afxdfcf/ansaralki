@@ -1,121 +1,833 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>ANSAR-TECH SUPPORT</title>
-  <style>
-    body {
-      background-color: #add8e6; /* light blue */
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    .header {
-      text-align: center;
-      font-size: 28px;
-      font-weight: bold;
-      color: red;
-      text-decoration: underline;
-      text-shadow: 0 0 10px red;
-      padding: 10px;
-      background-color: white;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: row;
-      height: calc(100vh - 50px);
-    }
-
-    .left-panel {
-      width: 50%;
-      background-color: #add8e6;
-      padding: 10px;
-    }
-
-    textarea {
-      width: 100%;
-      height: 80%;
-      background-color: #add8e6;
-      color: red;
-      font-size: 10px;
-      border: 1px solid #888;
-      resize: none;
-    }
-
-    button {
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 14px;
-      width: 100px;
-    }
-
-    .save-btn {
-      background-color: red;
-      color: white;
-      border: none;
-    }
-
-    .delete-btn {
-      background-color: #333;
-      color: white;
-      border: none;
-    }
-
-    .webview {
-      width: 50%;
-      height: 100%;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MURAD AC Service - Professional Air Conditioning Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a1929;
+            color: #f0f8ff;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1.5s ease-in-out;
+            animation: slideAnimation 20s infinite;
+        }
+        
+        .slide:nth-child(1) {
+            background-image: url('https://images.unsplash.com/photo-1595078475328-1ab05d0a6a0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920');
+            animation-delay: 0s;
+        }
+        
+        .slide:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920');
+            animation-delay: 5s;
+        }
+        
+        .slide:nth-child(3) {
+            background-image: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920');
+            animation-delay: 10s;
+        }
+        
+        .slide:nth-child(4) {
+            background-image: url('https://images.unsplash.com/photo-1567539968917-8d5c9fd7d3a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920');
+            animation-delay: 15s;
+        }
+        
+        @keyframes slideAnimation {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            25% { opacity: 1; }
+            35% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        
+        /* Overlay for better text readability */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 41, 0.85);
+            z-index: -1;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 20px 5%;
+            text-align: center;
+            background: rgba(10, 25, 41, 0.7);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            font-size: 3.8rem;
+            font-weight: 900;
+            color: #ff0038;
+            text-shadow: 0 0 15px rgba(255, 0, 56, 0.7),
+                         0 0 30px rgba(255, 0, 56, 0.5),
+                         0 0 45px rgba(255, 0, 56, 0.3);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            animation: glow 2s infinite alternate;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            padding: 15px 40px;
+            border-radius: 15px;
+            display: inline-block;
+            border: 3px solid #ff0038;
+            transform: perspective(500px) rotateX(5deg);
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 15px rgba(255, 0, 56, 0.7),
+                               0 0 30px rgba(255, 0, 56, 0.5),
+                               0 0 45px rgba(255, 0, 56, 0.3); }
+            to { text-shadow: 0 0 20px rgba(255, 0, 56, 0.9),
+                             0 0 40px rgba(255, 0, 56, 0.7),
+                             0 0 60px rgba(255, 0, 56, 0.5); }
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #4fc3f7;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content-box {
+            background: rgba(25, 40, 65, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: #4fc3f7;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #ff0038, #4fc3f7);
+            border-radius: 2px;
+        }
+        
+        /* Upload Section */
+        .upload-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .upload-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+        
+        .upload-box {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(20, 35, 60, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px dashed #4fc3f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: #ff0038;
+        }
+        
+        .upload-icon {
+            font-size: 3.5rem;
+            color: #4fc3f7;
+            margin-bottom: 15px;
+        }
+        
+        .upload-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .upload-text {
+            color: #a3b1c6;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .upload-btn {
+            background: linear-gradient(45deg, #ff0038, #ff5252);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        
+        .upload-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 56, 0.5);
+        }
+        
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(15, 30, 45, 0.8);
+            border: 1px solid #4fc3f7;
+            color: white;
+            font-size: 1rem;
+            resize: vertical;
+            margin-top: 15px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #ff0038;
+            box-shadow: 0 0 10px rgba(255, 0, 56, 0.3);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .contact-info {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            color: #ff0038;
+            font-size: 2rem;
+        }
+        
+        .contact-number {
+            color: white;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .contact-text {
+            color: #a3b1c6;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 20, 35, 0.95);
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(79, 195, 247, 0.2);
+        }
+        
+        .copyright {
+            color: #a3b1c6;
+            font-size: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.8rem;
+                padding: 12px 25px;
+            }
+            
+            .content-box {
+                padding: 25px;
+                width: 95%;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .upload-container {
+                flex-direction: column;
+            }
+            
+            .contact-info {
+                font-size: 1.4rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .content-box {
+                padding: 20px 15px;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .contact-info {
+                font-size: 1.2rem;
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="header">ANSAR-TECH SUPPORT</div>
-  <div class="container">
-    <div class="left-panel">
-      <textarea id="textInput" placeholder="Type your notes..."></textarea><br>
-      <button class="save-btn" onclick="saveText()">Save</button>
-      <button class="delete-btn" onclick="deleteText()">Delete</button>
+    <!-- Background Slideshow -->
+    <div class="slideshow">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
     </div>
-    <div class="webview">
-      <iframe id="siteFrame" src="https://ltcminer.com" onload="checkLogout()"></iframe>
+    
+    <div class="overlay"></div>
+    
+    <!-- Header -->
+    <header>
+        <h1 class="logo">MURAD AC SERVICE</h1>
+        <p class="tagline">Professional Air Conditioning Solutions Since 2010</p>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-box">
+            <h2 class="section-title">How Can We Help You Today?</h2>
+            <div class="upload-section">
+                <div class="upload-container">
+                    <div class="upload-box">
+                        <i class="fas fa-camera upload-icon"></i>
+                        <h3 class="upload-title">Upload AC Image</h3>
+                        <p class="upload-text">Upload a photo of your AC unit for diagnosis and service estimation</p>
+                        <button class="upload-btn"><i class="fas fa-cloud-upload-alt"></i> Select Image</button>
+                    </div>
+                    
+                    <div class="upload-box">
+                        <i class="fas fa-file-alt upload-icon"></i>
+                        <h3 class="upload-title">Describe Your Issue</h3>
+                        <p class="upload-text">Tell us about your AC problem and we'll provide a solution</p>
+                        <textarea placeholder="Describe your AC issue here..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-box contact-section">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-info">
+                <i class="fas fa-phone-alt contact-icon"></i>
+                <span class="contact-number">988397081</span>
+            </div>
+            <p class="contact-text">For immediate service, emergency repairs, or to schedule an appointment, call us anytime. Our technicians are available 24/7 to ensure your comfort.</p>
+        </div>
     </div>
-  </div>
-
-  <script>
-    function saveText() {
-      const text = document.getElementById('textInput').value;
-      localStorage.setItem('userText', text);
-      alert("Saved!");
-    }
-
-    function deleteText() {
-      document.getElementById('textInput').value = '';
-      localStorage.removeItem('userText');
-      alert("Deleted!");
-    }
-
-    // Restore text if saved
-    window.onload = function () {
-      const saved = localStorage.getItem('userText');
-      if (saved) document.getElementById('textInput').value = saved;
-    };
-
-    // Fake logout detection (simulate only)
-    function checkLogout() {
-      const iframe = document.getElementById('siteFrame');
-      // Simulate detecting logout
-      setTimeout(() => {
-        alert("Logout detected! (Simulated)");
-        // Simulate IP change
-        alert("Attempting to change IP address... (Note: This requires VPN and cannot be done with HTML)");
-      }, 10000); // After 10 seconds for example
-    }
-  </script>
+    
+    <!-- Footer -->
+    <footer>
+        <p class="copyright">© 2023 MURAD AC SERVICE. All Rights Reserved.</p>
+    </footer>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MURAD AC Service - Professional Air Conditioning Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a1929;
+            color: #f0f8ff;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1.5s ease-in-out;
+            animation: slideAnimation 20s infinite;
+        }
+        
+        .slide:nth-child(1) {
+            background-image: url('https://images.unsplash.com/photo-1595078475328-1ab05d0a6a0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920');
+            animation-delay: 0s;
+        }
+        
+        .slide:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920');
+            animation-delay: 5s;
+        }
+        
+        .slide:nth-child(3) {
+            background-image: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920');
+            animation-delay: 10s;
+        }
+        
+        .slide:nth-child(4) {
+            background-image: url('https://images.unsplash.com/photo-1567539968917-8d5c9fd7d3a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920');
+            animation-delay: 15s;
+        }
+        
+        @keyframes slideAnimation {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            25% { opacity: 1; }
+            35% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        
+        /* Overlay for better text readability */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 41, 0.85);
+            z-index: -1;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 20px 5%;
+            text-align: center;
+            background: rgba(10, 25, 41, 0.7);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            font-size: 3.8rem;
+            font-weight: 900;
+            color: #ff0038;
+            text-shadow: 0 0 15px rgba(255, 0, 56, 0.7),
+                         0 0 30px rgba(255, 0, 56, 0.5),
+                         0 0 45px rgba(255, 0, 56, 0.3);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            animation: glow 2s infinite alternate;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            padding: 15px 40px;
+            border-radius: 15px;
+            display: inline-block;
+            border: 3px solid #ff0038;
+            transform: perspective(500px) rotateX(5deg);
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 15px rgba(255, 0, 56, 0.7),
+                               0 0 30px rgba(255, 0, 56, 0.5),
+                               0 0 45px rgba(255, 0, 56, 0.3); }
+            to { text-shadow: 0 0 20px rgba(255, 0, 56, 0.9),
+                             0 0 40px rgba(255, 0, 56, 0.7),
+                             0 0 60px rgba(255, 0, 56, 0.5); }
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #4fc3f7;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content-box {
+            background: rgba(25, 40, 65, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: #4fc3f7;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #ff0038, #4fc3f7);
+            border-radius: 2px;
+        }
+        
+        /* Upload Section */
+        .upload-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .upload-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+        
+        .upload-box {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(20, 35, 60, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px dashed #4fc3f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: #ff0038;
+        }
+        
+        .upload-icon {
+            font-size: 3.5rem;
+            color: #4fc3f7;
+            margin-bottom: 15px;
+        }
+        
+        .upload-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .upload-text {
+            color: #a3b1c6;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .upload-btn {
+            background: linear-gradient(45deg, #ff0038, #ff5252);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        
+        .upload-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 56, 0.5);
+        }
+        
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(15, 30, 45, 0.8);
+            border: 1px solid #4fc3f7;
+            color: white;
+            font-size: 1rem;
+            resize: vertical;
+            margin-top: 15px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #ff0038;
+            box-shadow: 0 0 10px rgba(255, 0, 56, 0.3);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .contact-info {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            color: #ff0038;
+            font-size: 2rem;
+        }
+        
+        .contact-number {
+            color: white;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .contact-text {
+            color: #a3b1c6;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 20, 35, 0.95);
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(79, 195, 247, 0.2);
+        }
+        
+        .copyright {
+            color: #a3b1c6;
+            font-size: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.8rem;
+                padding: 12px 25px;
+            }
+            
+            .content-box {
+                padding: 25px;
+                width: 95%;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .upload-container {
+                flex-direction: column;
+            }
+            
+            .contact-info {
+                font-size: 1.4rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .content-box {
+                padding: 20px 15px;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .contact-info {
+                font-size: 1.2rem;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+    
+    <div class="overlay"></div>
+    
+    <!-- Header -->
+    <header>
+        <h1 class="logo">MURAD AC SERVICE</h1>
+        <p class="tagline">Professional Air Conditioning Solutions Since 2010</p>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-box">
+            <h2 class="section-title">How Can We Help You Today?</h2>
+            <div class="upload-section">
+                <div class="upload-container">
+                    <div class="upload-box">
+                        <i class="fas fa-camera upload-icon"></i>
+                        <h3 class="upload-title">Upload AC Image</h3>
+                        <p class="upload-text">Upload a photo of your AC unit for diagnosis and service estimation</p>
+                        <button class="upload-btn"><i class="fas fa-cloud-upload-alt"></i> Select Image</button>
+                    </div>
+                    
+                    <div class="upload-box">
+                        <i class="fas fa-file-alt upload-icon"></i>
+                        <h3 class="upload-title">Describe Your Issue</h3>
+                        <p class="upload-text">Tell us about your AC problem and we'll provide a solution</p>
+                        <textarea placeholder="Describe your AC issue here..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-box contact-section">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-info">
+                <i class="fas fa-phone-alt contact-icon"></i>
+                <span class="contact-number">988397081</span>
+            </div>
+            <p class="contact-text">For immediate service, emergency repairs, or to schedule an appointment, call us anytime. Our technicians are available 24/7 to ensure your comfort.</p>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p class="copyright">© 2023 MURAD AC SERVICE. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
